@@ -17,4 +17,4 @@ g++ -o launch_snake.exe \
   lib/GameMap.o \
   -Os -std=c++17 -pthread -lncurses
 
-#rm lib/*.o
+rm lib/*.o
