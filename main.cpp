@@ -6,23 +6,19 @@
 //  Copyright © 2020 PromiSe####. All rights reserved.
 //
 
-#if __linux__
-  #include <unistd.h>
-#else
-  #include <chrono>
-  #include <thread>
-  
-  void usleep(int nanoseconds) {
-    std::this_thread::sleep_for(std::chrono::nanoseconds(nanoseconds*1000));
-  }
-#endif
+#include <chrono>
 
 #include <iostream>
 #include <string>
+#include <thread>
 
 #include "lib/GameMap.h"
 #include "lib/Vector2.h"
 #include "lib/GameSnake.h"
+
+void usleep(int nanoseconds) {
+  std::this_thread::sleep_for(std::chrono::nanoseconds(nanoseconds*1000));
+}
 
 namespace GUI {
   #include <curses.h>
