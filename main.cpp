@@ -17,56 +17,56 @@
 #include "lib/GameSnake.h"
 
 void usleep(int nanoseconds) {
-  std::this_thread::sleep_for(std::chrono::nanoseconds(nanoseconds*1000));
+  std::this_thread::sleep_for(
+    std::chrono::nanoseconds(nanoseconds*1000));
 }
 
 namespace GUI {
   #include <curses.h>
 }
 
-GameSnake game;
-
-void inputHandler() {
+void inputHandler(GameSnake *game) {
   using namespace GUI;
-  
+
   while (true) {
     switch (getch()) {
-      case 119: {
-        game.setDir({ 0, -1 });
-      } break;
-      case 97: {
-        game.setDir({ -1, 0 });
-      } break;
-      case 100: {
-        game.setDir({ 1, 0 });
-      } break;
-      case 115: {
-        game.setDir({ 0, 1 });
+      case 'w':
+      case 'W':
+      case KEY_UP:
+      {
+        game->setDir({ 0, -1 });
       } break;
 
-      case 0x1b: {
-        switch (getch()) {
-          case 0x5b: {
-            switch (getch()) {
-              case 0x41: game.setDir({0, -1}); break;
-              case 0x42: game.setDir({0, 1});  break;
-              case 0x43: game.setDir({1, 0});  break;
-              case 0x44: game.setDir({-1, 0}); break;
-            }
+      case 'a':
+      case 'A':
+      case KEY_LEFT:
+      {
+        game->setDir({ -1, 0 });
+      } break;
 
-          } break;
-        }
+      case 'd':
+      case 'D':
+      case KEY_RIGHT:
+      {
+        game->setDir({ 1, 0 });
+      } break;
+
+      case 's':
+      case 'S':
+      case KEY_DOWN:
+      {
+        game->setDir({ 0, 1 });
       } break;
     }
   }
 };
 
-void runGame() {
+void runGame(GameSnake *game) {
   using namespace GUI;
   
-  while (game.tick()) {
-    Vector2 size = game.getSize();
-    RenderMap out = game.getRenderMap();
+  while (game->tick()) {
+    Vector2 size = game->getSize();
+    RenderMap out = game->getRenderMap();
 
     for(int y = -1; y < size.y+1; y++) {
       for(int x = 0; x < size.x*2 + 1; x++) {
@@ -96,8 +96,9 @@ void runGame() {
 
 int main() {
   using std::thread;
-
   using namespace GUI;
+
+  GameSnake game;
 
   game.setSize(38,22);
   game.setDir();
@@ -111,12 +112,14 @@ int main() {
 
   nodelay(stdscr, TRUE);
   scrollok(stdscr, TRUE);
+  keypad(stdscr, TRUE);
 
-  thread input(inputHandler);
+  thread input(inputHandler, &game);
 
-  runGame();
+  runGame(&game);
 
   nodelay(stdscr, FALSE);
+  keypad(stdscr, FALSE);
   getch();
   endwin();
   
