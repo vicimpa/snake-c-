@@ -155,6 +155,9 @@ bool GameSnake::tick() {
   if(isNeedApple())
     pushApple();
 
+  ticks++;
+  previewDir.set(dir);
+
   if(nextValue == 0)
     return tick(score, newPosition);
   
@@ -167,13 +170,8 @@ bool GameSnake::tick() {
 }
 
 bool GameSnake::tick(int value, Vector2 newPosition) {
-  if(value == score) {
-    ticks++;
-    previewDir.set(dir);
-    
-    if(isConvertCut)
-      deleteBecon();
-  }
+  if(value == score && isConvertCut)
+    deleteBecon();
   
   Vector2 nowPosition = map.getValuePosition(value);
   
