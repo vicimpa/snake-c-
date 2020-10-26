@@ -45,12 +45,8 @@ void inputHandler() {
       } break;
 
       case 0x1b: {
-        usleep(100);
-        
         switch (getch()) {
           case 0x5b: {
-            usleep(100);
-
             switch (getch()) {
               case 0x41: game.setDir({0, -1}); break;
               case 0x42: game.setDir({0, 1});  break;
@@ -62,8 +58,6 @@ void inputHandler() {
         }
       } break;
     }
-    
-    usleep(1000);
   }
 };
 
