@@ -72,40 +72,40 @@ Vector2& Vector2::operator/=(const Vector2& vec){
 Vector2 operator+(const int & a, const Vector2 & b) {
   return Vector2(a).add(b);
 }
-Vector2 operator+(const Vector2 & a, const int & b) {
-  return Vector2(a).add(b);
+Vector2 operator+(Vector2 a, const int & b) {
+  return a.add(b);
 }
-Vector2 operator+(const Vector2 & a, const Vector2 & b) {
-  return Vector2(a).add(b);
+Vector2 operator+(Vector2 a, const Vector2 & b) {
+  return a.add(b);
 }
 
 Vector2 operator-(const int & a, const Vector2 & b) {
   return Vector2(a).del(b);
 }
-Vector2 operator-(const Vector2 & a, const int & b) {
+Vector2 operator-(Vector2 a, const int & b) {
   return Vector2(a).del(b);
 }
-Vector2 operator-(const Vector2 & a, const Vector2 & b) {
+Vector2 operator-(Vector2 a, const Vector2 & b) {
   return Vector2(a).del(b);
 }
 
 Vector2 operator*(const int & a, const Vector2 & b) {
   return Vector2(a).mul(b);
 }
-Vector2 operator*(const Vector2 & a, const int & b) {
+Vector2 operator*(Vector2 a, const int & b) {
   return Vector2(a).mul(b);
 }
-Vector2 operator*(const Vector2 & a, const Vector2 & b) {
+Vector2 operator*(Vector2 a, const Vector2 & b) {
   return Vector2(a).mul(b);
 }
 
 Vector2 operator/(const int & a, const Vector2 & b) {
   return Vector2(a).div(b);
 }
-Vector2 operator/(const Vector2 & a, const int & b) {
+Vector2 operator/(Vector2 a, const int & b) {
   return Vector2(a).div(b);
 }
-Vector2 operator/(const Vector2 & a, const Vector2 & b) {
+Vector2 operator/(Vector2 a, const Vector2 & b) {
   return Vector2(a).div(b);
 }
 
@@ -115,25 +115,25 @@ bool operator&&(const Vector2 & a, const Vector2 & b) {
 
 Vector2& Vector2::add(int xy) { x += xy; y += xy; return *this; }
 Vector2& Vector2::add(int nX, int nY) { x += nX; y += nY; return *this; }
-Vector2& Vector2::add(Vector2 vec) { x+= vec.x; y += vec.y; return *this; }
+Vector2& Vector2::add(const Vector2 & vec) { x+= vec.x; y += vec.y; return *this; }
 
 Vector2& Vector2::del(int xy) { x -= xy; y -= xy; return *this; }
 Vector2& Vector2::del(int nX, int nY) { x -= nX; y -= nY; return *this; }
-Vector2& Vector2::del(Vector2 vec) { x-= vec.x; y -= vec.y; return *this; }
+Vector2& Vector2::del(const Vector2& vec) { x-= vec.x; y -= vec.y; return *this; }
 
 Vector2& Vector2::mul(int xy) { x *= xy; y *= xy; return *this; }
 Vector2& Vector2::mul(int nX, int nY) { x *= nX; y *= nY; return *this; }
-Vector2& Vector2::mul(Vector2 vec) { x*= vec.x; y *= vec.y; return *this; }
+Vector2& Vector2::mul(const Vector2& vec) { x*= vec.x; y *= vec.y; return *this; }
 
 Vector2& Vector2::div(int xy) { x /= xy; y /= xy; return *this; }
 Vector2& Vector2::div(int nX, int nY) { x /= nX; y /= nY; return *this; }
-Vector2& Vector2::div(Vector2 vec) { x/= vec.x; y /= vec.y; return *this; }
+Vector2& Vector2::div(const Vector2& vec) { x/= vec.x; y /= vec.y; return *this; }
 
 Vector2& Vector2::set(int xy) { x = xy; y = xy; return *this; }
 Vector2& Vector2::set(int nX, int nY) { x = nX; y = nY; return *this; }
-Vector2& Vector2::set(Vector2 vec) { x= vec.x; y = vec.y; return *this; }
+Vector2& Vector2::set(const Vector2& vec) { x= vec.x; y = vec.y; return *this; }
 
 bool Vector2::equal(int num) const {  return x == num && y == num; }
-bool Vector2::equal(Vector2 vec) const { return x == vec.x && y == vec.y; }
+bool Vector2::equal(const Vector2& vec) const { return x == vec.x && y == vec.y; }
 
 Vector2 Vector2::clone() { return Vector2(x, y); }
