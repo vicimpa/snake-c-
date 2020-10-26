@@ -31,13 +31,26 @@ void inputHandler() {
   
   while (true) {
     switch (getch()) {
+      case 119: {
+        game.setDir({ 0, -1 });
+      } break;
+      case 97: {
+        game.setDir({ -1, 0 });
+      } break;
+      case 100: {
+        game.setDir({ 1, 0 });
+      } break;
+      case 115: {
+        game.setDir({ 0, 1 });
+      } break;
+
       case 0x1b: {
         usleep(100);
         
         switch (getch()) {
           case 0x5b: {
-            
             usleep(100);
+
             switch (getch()) {
               case 0x41: game.setDir({0, -1}); break;
               case 0x42: game.setDir({0, 1});  break;
