@@ -6,23 +6,20 @@
 //  Copyright © 2020 PromiSe####. All rights reserved.
 //
 
-#include <chrono>
+#include <math.h>
 
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <thread>
 
 #include "lib/GameMap.h"
-#include "lib/Vector2.h"
 #include "lib/GameSnake.h"
+#include "lib/Vector2.h"
+#include "lib/gui.h"
 
 void usleep(int nanoseconds) {
-  std::this_thread::sleep_for(
-    std::chrono::nanoseconds(nanoseconds*1000));
-}
-
-namespace GUI {
-  #include <curses.h>
+  std::this_thread::sleep_for(std::chrono::nanoseconds(nanoseconds * 1000));
 }
 
 void inputHandler(GameSnake *game) {
@@ -32,38 +29,52 @@ void inputHandler(GameSnake *game) {
     switch (getch()) {
       case 'w':
       case 'W':
-      case KEY_UP:
-      {
-        game->setDir({ 0, -1 });
+      case KEY_UP: {
+        game->setDir({0, -1});
       } break;
 
       case 'a':
       case 'A':
-      case KEY_LEFT:
-      {
-        game->setDir({ -1, 0 });
+      case KEY_LEFT: {
+        game->setDir({-1, 0});
       } break;
 
       case 'd':
       case 'D':
-      case KEY_RIGHT:
-      {
-        game->setDir({ 1, 0 });
+      case KEY_RIGHT: {
+        game->setDir({1, 0});
       } break;
 
       case 's':
       case 'S':
-      case KEY_DOWN:
-      {
-        game->setDir({ 0, 1 });
+      case KEY_DOWN: {
+        game->setDir({0, 1});
       } break;
     }
   }
 };
 
+int getRenderPoint(RenderObject obj) {
+  switch (obj) {
+    case RenderObject::APPLE:
+      return 4;
+    case RenderObject::BECON:
+      return 5;
+    case RenderObject::HEAD:
+      return 1;
+    case RenderObject::BODY:
+      return 2;
+    case RenderObject::TAIL:
+      return 3;
+    default:
+      return 0;
+  }
+}
+
 void runGame(GameSnake *game) {
   using namespace GUI;
-  
+  using std::ceil;
+
   while (game->tick()) {
     Vector2 size = game->getSize();
     RenderMap out = game->getRenderMap();
@@ -90,7 +101,7 @@ void runGame(GameSnake *game) {
         }
       }
     }
-    
+
     usleep(150000);
   }
 }
@@ -101,7 +112,7 @@ int main() {
 
   GameSnake game;
 
-  game.setSize(38,22);
+  game.setSize(38, 22);
   game.setDir();
   game.setScore(4);
   game.pushSnake();
@@ -123,6 +134,6 @@ int main() {
   keypad(stdscr, FALSE);
   getch();
   endwin();
-  
+
   return 0;
 }
