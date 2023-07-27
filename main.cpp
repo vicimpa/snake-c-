@@ -68,13 +68,14 @@ void runGame(GameSnake *game) {
     Vector2 size = game->getSize();
     RenderMap out = game->getRenderMap();
 
-    for(int y = -1; y < size.y+1; y++) {
-      for(int x = 0; x < size.x*2 + 1; x++) {
-        if(y == 0) mvaddstr(y, x + 1, "#"); else mvaddstr(y, x + 1, " ");
-        if(y == size.y - 1) mvaddstr(y+2, x + 1, "#"); else mvaddstr(y+2, x, " ");
-        if(x == 0) mvaddstr(y+1, x, "#"); else mvaddstr(y+1, x, " ");
-        if(x == size.x*2) mvaddstr(y+1, x+1, "#"); else mvaddstr(y+1, x+1, " ");
-      }
+    for(int x = 0; x < size.x*2+1; x++ ){
+      mvaddstr(0, x, "#");
+      mvaddstr(size.y+1, x, "#");
+    }
+
+    for(int y = 0; y < size.y+1; y++) {
+      mvaddstr(y, 0, "#");
+      mvaddstr(y, size.x*2, "#");
     }
 
     for(int y = 0; y < out.size(); y++) {
