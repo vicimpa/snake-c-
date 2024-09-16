@@ -11,8 +11,8 @@
 #include <vector>
 #include "Vector2.h"
 
-//using VectorMap = std::vector<int>;
-//using Vector2Array = std::vector<Vector2>;
+// using VectorMap = std::vector<int>;
+// using Vector2Array = std::vector<Vector2>;
 
 typedef std::vector<int> VectorMap;
 typedef std::vector<Vector2> Vector2Array;
@@ -34,7 +34,7 @@ public:
   int size();
 
   Vector2 getSize();
-  
+
   Vector2 getPosition(int index);
 
   int getIndex(int x, int y);
